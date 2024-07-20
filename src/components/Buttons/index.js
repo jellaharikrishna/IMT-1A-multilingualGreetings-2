@@ -1,19 +1,21 @@
 import './index.css'
 
 const Buttons = props => {
-  const {data, toggle} = props
-  const {id, imageUrl, buttonText, imageAltText} = data
+  const {data, toggleGreeting, isActiveBtn} = props
+  const {id, buttonText} = data
+
+  const customBtn = isActiveBtn ? 'active-button' : 'button'
 
   const onClickButton = () => {
-    toggle(id)
+    toggleGreeting(id)
   }
 
   return (
-    <div className="buttons-container">
-      <button type="button" onClick={onClickButton}>
+    <li className="button-card">
+      <button className={customBtn} type="button" onClick={onClickButton}>
         {buttonText}
       </button>
-    </div>
+    </li>
   )
 }
 

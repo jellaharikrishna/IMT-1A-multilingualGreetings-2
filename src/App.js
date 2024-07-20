@@ -36,7 +36,7 @@ class App extends Component {
     activeImageAltText: languageGreetingsList[0].imageAltText,
   }
 
-  toggle = id => {
+  toggleGreeting = id => {
     const filterList = languageGreetingsList.filter(each => each.id === id)
     filterList.map(each =>
       this.setState({
@@ -48,17 +48,27 @@ class App extends Component {
   }
 
   render() {
-    const {activeId, activeImageAltText} = this.state
-    console.log(activeId)
-    console.log(activeImageAltText)
+    const {activeId, activeImageUrl, activeImageAltText} = this.state
+
     return (
       <div className="main">
         <div className="body">
           <h1 className="heading">Multilingual Greetings</h1>
-          {languageGreetingsList.map(each => (
-            <Buttons key={each.id} data={each} toggle={this.toggle} />
-          ))}
-          <p>{activeImageAltText}</p>
+          <ul className="buttons-container">
+            {languageGreetingsList.map(each => (
+              <Buttons
+                key={each.id}
+                data={each}
+                toggleGreeting={this.toggleGreeting}
+                isActiveBtn={each.id === activeId}
+              />
+            ))}
+          </ul>
+          <img
+            className="image"
+            src={activeImageUrl}
+            alt={activeImageAltText}
+          />
         </div>
       </div>
     )
